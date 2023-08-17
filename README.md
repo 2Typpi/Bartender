@@ -1,5 +1,11 @@
 # Bartender
 
+## Speed
+
+90ml = 68sec
+10ml = 7,5sec
+5ml = 4sec
+
 ## Needed Ingredients
 1. Vodka
 2. Sugar syrup
@@ -27,9 +33,9 @@
 - Orangejuice
 
 **Tequila Sunrise**
-- Tequila
-- Orangejuice
-- Grenadine
+- Tequila 45ml
+- Orangejuice 90ml 
+- Grenadine 50ml
 
 **Cosmopolitan**
 - Vodka

@@ -1,59 +1,128 @@
 import sys
+from crono import Crono
 
-from PyQt6.QtWidgets import QApplication, QMainWindow, QWidget, QGridLayout, QTabWidget, QPushButton
-from PyQt6.QtGui import QPalette, QColor
-
-
-class Color(QWidget):
-
-  def __init__(self, color):
-    super(Color, self).__init__()
-    self.setAutoFillBackground(True)
-
-    palette = self.palette()
-    palette.setColor(QPalette.ColorRole.Window, QColor(color))
-    self.setPalette(palette)
+from PyQt6.QtCore import QTimer
+from PyQt6.QtWidgets import QApplication, QMainWindow, QWidget, QGridLayout, QTabWidget, QPushButton, QStackedLayout, QProgressBar, QVBoxLayout  # noqa: E501
 
 class MainWindow(QMainWindow):
-    
+
   def __init__(self):
     super(MainWindow, self).__init__()
+    self.crono = Crono()
+
     self.setWindowTitle("Bartender")
     self.resize(600, 500)
 
-    tabs = QTabWidget()
-    tabs.setTabPosition(QTabWidget.TabPosition.North)
-    tabs.setMovable(True)
+    self.tabs = QTabWidget()
+    self.tabs.setTabPosition(QTabWidget.TabPosition.North)
 
-    tabs.addTab(self.rum_tab(), "Vodka")
-    tabs.addTab(self.vodka_tab(), "Rum")
+    self.tabs.addTab(self.vodka_tab(), "Vodka")
+    self.tabs.addTab(self.rum_tab(), "Rum")
 
-    self.setCentralWidget(tabs)
+    self.stackedLayout = QStackedLayout()
+
+    self.prog_bar = QProgressBar()
+    self.crono.tick.connect(self.prog_bar.setValue)
+
+    layout = QVBoxLayout()
+    layout.addWidget(self.prog_bar)
+
+    prog_widget = QWidget()
+    prog_widget.setLayout(layout)
+
+    self.stackedLayout.addWidget(self.tabs)
+    self.stackedLayout.addWidget(prog_widget)
+
+    widget = QWidget()
+    widget.setLayout(self.stackedLayout)
+    self.setCentralWidget(widget)
 
   def rum_tab(self):
     rumTab = QWidget()
     layout = QGridLayout()
 
-    layout.addWidget(QPushButton("Rum Sour"), 0, 0)
-    layout.addWidget(QPushButton("Mai Tai"), 0, 1)
-    layout.addWidget(QPushButton("Daiquiri"), 1, 0)
-    layout.addWidget(QPushButton("Hurricane Cocktail"), 1, 1)
-    layout.addWidget(QPushButton("Mojito"), 2, 0)
+    rum_sour_button = QPushButton("Rum Sour")
+    rum_sour_button.clicked.connect(self.rum_sour)
+
+    mai_tai_button = QPushButton("Mai Tai")
+    mai_tai_button.clicked.connect(self.mai_tai)
+
+    daiquiri_button = QPushButton("Daiquiri")
+    daiquiri_button.clicked.connect(self.daiquiri)
+
+    hurricane_cocktail_button = QPushButton("Hurricane Cocktail")
+    hurricane_cocktail_button.clicked.connect(self.hurricane)
+
+    mojito_button = QPushButton("Mojito")
+    mojito_button.clicked.connect(self.mojito)
+
+    layout.addWidget(rum_sour_button, 0, 0)
+    layout.addWidget(mai_tai_button, 0, 1)
+    layout.addWidget(daiquiri_button, 1, 0)
+    layout.addWidget(hurricane_cocktail_button, 1, 1)
+    layout.addWidget(mojito_button, 2, 0)
 
     rumTab.setLayout(layout)
     return rumTab
+  
+  def rum_sour(self):
+    print("sour")
+
+  def mai_tai(self):
+    print("mai")
+
+  def daiquiri(self):
+    print("daiquiri")
+
+  def hurricane(self):
+    print("hurricane")
+
+  def mojito(self):
+    print("mojito")
   
   def vodka_tab(self):
     vodkaTab = QWidget()
     layout = QGridLayout()
 
-    layout.addWidget(QPushButton("Sex on the Beach"), 0, 0)
-    layout.addWidget(QPushButton("Screwdriver"), 0, 1)
-    layout.addWidget(QPushButton("Tequila Sunrise"), 1, 0)
-    layout.addWidget(QPushButton("Cosmopolitan"), 1, 1)
+    sex_button = QPushButton("Sex on the Beach")
+    sex_button.clicked.connect(self.sex_on_the_beach)
+
+    screwdriver_button = QPushButton("Screwdriver")
+    screwdriver_button.clicked.connect(self.screwdriver)
+
+    tequila_button = QPushButton("Tequila Sunrise")
+    tequila_button.clicked.connect(self.tequila_sunrise)
+
+    cosmopolitan_button = QPushButton("Cosmopolitan")
+    cosmopolitan_button.clicked.connect(self.cosmopolitan)
+
+    layout.addWidget(sex_button, 0, 0)
+    layout.addWidget(screwdriver_button, 0, 1)
+    layout.addWidget(tequila_button, 1, 0)
+    layout.addWidget(cosmopolitan_button, 1, 1)
 
     vodkaTab.setLayout(layout)
     return vodkaTab
+  
+  def sex_on_the_beach(self):
+    self.stackedLayout.setCurrentIndex(1)
+    self.crono.start()
+    print("Sex")
+    #time.sleep(2)
+    self.stackedLayout.setCurrentIndex(0)
+
+  def screwdriver(self):
+    self.stackedLayout.setCurrentIndex(1)
+    self.crono.setMaxTime(10)
+    QTimer.singleShot(10000, lambda: self.stackedLayout.setCurrentIndex(0))
+    self.crono.start()
+    print("mixScrewdriver")
+
+  def tequila_sunrise(self):
+    print("Teq")
+
+  def cosmopolitan(self):
+    print("cosmo")
 
 
 if __name__ == "__main__":
