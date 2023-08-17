@@ -105,11 +105,7 @@ class MainWindow(QMainWindow):
     return vodkaTab
   
   def sex_on_the_beach(self):
-    self.stackedLayout.setCurrentIndex(1)
-    self.crono.start()
     print("Sex")
-    #time.sleep(2)
-    self.stackedLayout.setCurrentIndex(0)
 
   def screwdriver(self):
     self.stackedLayout.setCurrentIndex(1)

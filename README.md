@@ -2,9 +2,12 @@
 
 ## Speed
 
+80ml/min for my pump
+
 90ml = 68sec
 10ml = 7,5sec
 5ml = 4sec
+1,33ml = 1sec
 
 ## Needed Ingredients
 1. Vodka
