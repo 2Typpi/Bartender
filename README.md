@@ -11,13 +11,13 @@
 
 ## Needed Ingredients
 1. Vodka
-2. Sugar syrup
-3. Cranberry nectar
-4. Orangejuice
-5. Tequila
-6. Grenadine
-7. Lime juice
-8. Rum
+2. Rum
+3. Tequila
+4. Grenadine
+5. Sugar syrup
+6. Cranberry nectar
+7. Orangejuice
+8. Lime juice
 
 -> Total of **9 Cocktails** possible
 
