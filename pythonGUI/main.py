@@ -1,8 +1,9 @@
 import sys
 from crono import Crono
 
-from PyQt5.QtCore import QTimer
-from PyQt5.QtWidgets import QApplication, QMainWindow, QWidget, QGridLayout, QTabWidget, QPushButton, QStackedLayout, QProgressBar, QVBoxLayout  # noqa: E501
+from PyQt5.QtCore import QTimer, Qt
+from PyQt5.QtGui import QPixmap
+from PyQt5.QtWidgets import QApplication, QMainWindow, QWidget, QGridLayout, QTabWidget, QPushButton, QStackedLayout, QProgressBar, QVBoxLayout, QLabel  # noqa: E501
 
 from drinks import drinks
 from mix_cocktails import pour_drink
@@ -15,7 +16,7 @@ class MainWindow(QMainWindow):
         self.crono = Crono()
 
         self.setWindowTitle("Bartender")
-        self.resize(600, 500)
+        self.resize(2500, 1500)
 
         self.tabs = QTabWidget()
         self.tabs.setTabPosition(QTabWidget.TabPosition.North)
@@ -94,15 +95,14 @@ class MainWindow(QMainWindow):
         screwdriver_button = QPushButton("Screwdriver")
         screwdriver_button.clicked.connect(self.screwdriver)
 
-        tequila_button = QPushButton("Tequila Sunrise")
-        tequila_button.clicked.connect(self.tequila_sunrise)
+        tequila_widget = self.define_button("Tequila Sunrise", "Tequila_Sunrise", self.tequila_sunrise)  # noqa: E501
 
         cosmopolitan_button = QPushButton("Cosmopolitan")
         cosmopolitan_button.clicked.connect(self.cosmopolitan)
 
         layout.addWidget(sex_button, 0, 0)
         layout.addWidget(screwdriver_button, 0, 1)
-        layout.addWidget(tequila_button, 1, 0)
+        layout.addWidget(tequila_widget, 1, 0)
         layout.addWidget(cosmopolitan_button, 1, 1)
 
         vodkaTab.setLayout(layout)
@@ -132,10 +132,35 @@ class MainWindow(QMainWindow):
     def cosmopolitan(self):
         print("cosmo")
 
+    def define_button(self, name, image, function):
+        layout = QVBoxLayout()
+        layout.setAlignment(Qt.AlignCenter)
+
+        label = QLabel()
+        label.setPixmap(QPixmap("pythonGUI/image/{}.png".format(image)))
+        layout.addWidget(label)
+
+        button = QPushButton(name)
+        # button.setMaximumWidth(10000)
+        button.clicked.connect(function)
+        layout.addWidget(button)
+
+        widget = QWidget()
+        widget.setLayout(layout)
+        widget.resize(label.width(), label.height())
+
+        return widget
+
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     window = MainWindow()
+
+    File = open("pythonGUI/style/main.qss", 'r')
+
+    with File:
+        qss = File.read()
+        app.setStyleSheet(qss)
 
     window.show()
     sys.exit(app.exec())

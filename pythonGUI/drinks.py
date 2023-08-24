@@ -14,7 +14,7 @@ class Ingredient(IntEnum):
 
 drinks = {
     "tequila_sunrise": {
-        "pour_time": 77,
+        "pour_time": 78,
         "ingredients": [{
             "wait_before_pour": 0,
             "name": Ingredient.TEQUILA,
