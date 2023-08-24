@@ -1,31 +1,21 @@
-from enum import Enum
+import time
+from _thread import start_new_thread
+# import gpiozero
 
-class Ingredient(Enum):
-    VODKA = 0
-    RUM = 1
-    TEQUILA = 2
-    GRENADINE = 3
-    SUGAR_SYRUP = 4
-    CRANBERRY_NECTAR = 5
-    ORANGE_JUICE = 6
-    LIME_JUICE = 7
 
-drinks = {
-    "tequila_sunrise": {
-        "pour_time": 77,
-        "ingredients": [{
-            "wait_before_pour": 0,
-            "name": Ingredient.TEQUILA,
-            "pour_time": 34
-        }, {
-            "wait_before_pour": 0,
-            "name": Ingredient.ORANGE_JUICE,
-            "pour_time": 68
-        }, {
-            "wait_before_pour": 40,
-            "name": Ingredient.GRENADINE,
-            "pour_time": 37
-        }]
-    },
-}
+def pour_drink(ingredients):
+    for ingredient in ingredients:
+        start_new_thread(pour_ingredient, (ingredient,))
 
+
+def pour_ingredient(ingredient):
+    name = ingredient["name"]
+    wait_pour = ingredient["wait_before_pour"]
+    print("{}: wait for pour".format(wait_pour))
+    time.sleep(wait_pour)
+    # relay = gpiozero.OutputDevice(ingredient["name"], active_high=True, initial_value=False)  # noqa: E501
+    # relay.on()
+    print("{}: on for {}".format(int(name), ingredient["pour_time"]))
+    time.sleep(ingredient["pour_time"])
+    print("{}: off".format(int(name)))
+    # relay.off()

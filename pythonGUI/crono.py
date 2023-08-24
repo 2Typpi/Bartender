@@ -2,9 +2,11 @@ from PyQt5 import QtCore
 import time
 import math
 
+
 class Crono(QtCore.QThread):
-    tick = QtCore.pyqtSignal(int, name="changed") #New style signal
-    def __init__(self, maxtime=1, parent = None):
+    tick = QtCore.pyqtSignal(int, name="changed")  # New style signal
+
+    def __init__(self, maxtime=1, parent=None):
         super(Crono, self).__init__(parent)
         self.maxtime = maxtime
 
