@@ -2,8 +2,8 @@ import sys
 from crono import Crono
 
 from PyQt5.QtCore import QTimer, Qt
-from PyQt5.QtGui import QPixmap
-from PyQt5.QtWidgets import QApplication, QMainWindow, QWidget, QGridLayout, QTabWidget, QPushButton, QStackedLayout, QProgressBar, QVBoxLayout, QLabel  # noqa: E501
+from PyQt5.QtGui import QPixmap, QFont
+from PyQt5.QtWidgets import QApplication, QMainWindow, QWidget, QGridLayout, QTabWidget, QPushButton, QStackedLayout, QProgressBar, QVBoxLayout, QLabel, QSizePolicy  # noqa: E501
 
 from drinks import drinks
 from mix_cocktails import pour_drink
@@ -89,21 +89,15 @@ class MainWindow(QMainWindow):
         vodkaTab = QWidget()
         layout = QGridLayout()
 
-        sex_button = QPushButton("Sex on the Beach")
-        sex_button.clicked.connect(self.sex_on_the_beach)
-
-        screwdriver_button = QPushButton("Screwdriver")
-        screwdriver_button.clicked.connect(self.screwdriver)
-
+        sex_widget = self.define_button("Sex on the Beach", "Sex_On_The_Beach", self.sex_on_the_beach)  # noqa: E501
+        screwdriver_widget = self.define_button("Screwdriver", "Screwdriver", self.screwdriver)  # noqa: E501
         tequila_widget = self.define_button("Tequila Sunrise", "Tequila_Sunrise", self.tequila_sunrise)  # noqa: E501
+        cosmopolitan_widget = self.define_button("Cosmopolitan", "Cosmopolitan", self.cosmopolitan)  # noqa: E501
 
-        cosmopolitan_button = QPushButton("Cosmopolitan")
-        cosmopolitan_button.clicked.connect(self.cosmopolitan)
-
-        layout.addWidget(sex_button, 0, 0)
-        layout.addWidget(screwdriver_button, 0, 1)
+        layout.addWidget(sex_widget, 0, 0)
+        layout.addWidget(screwdriver_widget, 0, 1)
         layout.addWidget(tequila_widget, 1, 0)
-        layout.addWidget(cosmopolitan_button, 1, 1)
+        layout.addWidget(cosmopolitan_widget, 1, 1)
 
         vodkaTab.setLayout(layout)
         return vodkaTab
@@ -135,17 +129,20 @@ class MainWindow(QMainWindow):
     def define_button(self, name, image, function):
         layout = QVBoxLayout()
         layout.setAlignment(Qt.AlignCenter)
+        layout.setObjectName("ButtonCard")
 
         label = QLabel()
         label.setPixmap(QPixmap("pythonGUI/image/{}.png".format(image)))
         layout.addWidget(label)
 
         button = QPushButton(name)
-        # button.setMaximumWidth(10000)
         button.clicked.connect(function)
+        button.setSizePolicy(QSizePolicy.Preferred, QSizePolicy.Expanding)
+        button.setFont(QFont("Sans Serif", 15))
         layout.addWidget(button)
 
         widget = QWidget()
+        widget.setObjectName("ButtonCard")
         widget.setLayout(layout)
         widget.resize(label.width(), label.height())
 

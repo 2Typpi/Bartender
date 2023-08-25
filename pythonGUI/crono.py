@@ -16,6 +16,5 @@ class Crono(QtCore.QThread):
     def run(self):
         for x in range(1, self.maxtime + 1):
             self.tick.emit(math.floor(x * (100 / self.maxtime)))
-            print((100 / self.maxtime) + 0.5)
             print(x)
             time.sleep(1)
