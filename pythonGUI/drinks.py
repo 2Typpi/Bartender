@@ -19,14 +19,15 @@ drinks = {
             "wait_before_pour": 0,
             "name": Ingredient.TEQUILA,
             "pour_time": 34
-        }, {
-            "wait_before_pour": 0,
-            "name": Ingredient.ORANGE_JUICE,
-            "pour_time": 68
-        }, {
-            "wait_before_pour": 40,
-            "name": Ingredient.GRENADINE,
-            "pour_time": 37
         }]
     },
+}
+{
+    "wait_before_pour": 0,
+    "name": Ingredient.ORANGE_JUICE,
+    "pour_time": 68
+}, {
+    "wait_before_pour": 40,
+    "name": Ingredient.GRENADINE,
+    "pour_time": 37
 }

@@ -1,6 +1,6 @@
 import time
 from _thread import start_new_thread
-# import gpiozero
+import gpiozero
 
 
 def pour_drink(ingredients):
@@ -13,9 +13,10 @@ def pour_ingredient(ingredient):
     wait_pour = ingredient["wait_before_pour"]
     print("{}: wait for pour".format(wait_pour))
     time.sleep(wait_pour)
-    # relay = gpiozero.OutputDevice(ingredient["name"], active_high=True, initial_value=False)  # noqa: E501
-    # relay.on()
+    relay = gpiozero.OutputDevice(int(ingredient["name"]), active_high=True, initial_value=False)  # noqa: E501
+    print(relay)
+    relay.on()
     print("{}: on for {}".format(int(name), ingredient["pour_time"]))
     time.sleep(ingredient["pour_time"])
     print("{}: off".format(int(name)))
-    # relay.off()
+    relay.off()
