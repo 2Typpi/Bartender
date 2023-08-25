@@ -1,6 +1,6 @@
 import time
 from _thread import start_new_thread
-import gpiozero
+import RPi.GPIO as GPIO
 
 
 def pour_drink(ingredients):
@@ -9,14 +9,20 @@ def pour_drink(ingredients):
 
 
 def pour_ingredient(ingredient):
-    name = ingredient["name"]
+    RELAIS_1_GPIO = ingredient["name"]
     wait_pour = ingredient["wait_before_pour"]
+
+    # Wait for other ingredients
     print("{}: wait for pour".format(wait_pour))
     time.sleep(wait_pour)
-    relay = gpiozero.OutputDevice(int(ingredient["name"]), active_high=True, initial_value=False)  # noqa: E501
-    print(relay)
-    relay.on()
-    print("{}: on for {}".format(int(name), ingredient["pour_time"]))
+
+    GPIO.setmode(GPIO.BCM)  # GPIO Nummern statt Board Nummern
+    RELAIS_1_GPIO = 17
+    GPIO.setup(RELAIS_1_GPIO, GPIO.OUT)  # GPIO Modus zuweisen
+    GPIO.output(RELAIS_1_GPIO, GPIO.HIGH)  # an
+    print("{}: on for {}".format(RELAIS_1_GPIO, ingredient["pour_time"]))
+
     time.sleep(ingredient["pour_time"])
-    print("{}: off".format(int(name)))
-    relay.off()
+
+    GPIO.output(RELAIS_1_GPIO, GPIO.LOW)  # aus
+    print("{}: off".format(RELAIS_1_GPIO))
