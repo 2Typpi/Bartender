@@ -16,7 +16,7 @@ class MainWindow(QMainWindow):
         self.crono = Crono()
 
         self.setWindowTitle("Bartender")
-        self.resize(2500, 1500)
+        self.resize(500, 600)
 
         self.tabs = QTabWidget()
         self.tabs.setTabPosition(QTabWidget.TabPosition.North)
@@ -132,7 +132,7 @@ class MainWindow(QMainWindow):
         layout.setObjectName("ButtonCard")
 
         label = QLabel()
-        label.setPixmap(QPixmap("pythonGUI/image/{}.png".format(image)))
+        label.setPixmap(QPixmap("pythonGUI/image/{}_128.png".format(image)))
         layout.addWidget(label)
 
         button = QPushButton(name)
