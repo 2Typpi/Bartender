@@ -16,7 +16,7 @@ class MainWindow(QMainWindow):
         self.crono = Crono()
 
         self.setWindowTitle("Bartender")
-        self.resize(500, 600)
+        self.resize(1024, 600)
 
         self.tabs = QTabWidget()
         self.tabs.setTabPosition(QTabWidget.TabPosition.North)
@@ -46,26 +46,17 @@ class MainWindow(QMainWindow):
         rumTab = QWidget()
         layout = QGridLayout()
 
-        rum_sour_button = QPushButton("Rum Sour")
-        rum_sour_button.clicked.connect(self.rum_sour)
+        rum_widget = self.define_button("Rum Sour", "Rum_Sour", self.rum_sour)  # noqa: E501
+        mai_widget = self.define_button("Mai Tai", "Mai_Tai", self.mai_tai)  # noqa: E501
+        daiquiri_widget = self.define_button("Daiquiri", "Daiquiri", self.daiquiri)  # noqa: E501
+        hurricane_widget = self.define_button("Hurricane", "Hurricane", self.hurricane)  # noqa: E501
+        mojito_widget = self.define_button("Mojito", "Mojito", self.mojito)  # noqa: E501
 
-        mai_tai_button = QPushButton("Mai Tai")
-        mai_tai_button.clicked.connect(self.mai_tai)
-
-        daiquiri_button = QPushButton("Daiquiri")
-        daiquiri_button.clicked.connect(self.daiquiri)
-
-        hurricane_cocktail_button = QPushButton("Hurricane Cocktail")
-        hurricane_cocktail_button.clicked.connect(self.hurricane)
-
-        mojito_button = QPushButton("Mojito")
-        mojito_button.clicked.connect(self.mojito)
-
-        layout.addWidget(rum_sour_button, 0, 0)
-        layout.addWidget(mai_tai_button, 0, 1)
-        layout.addWidget(daiquiri_button, 1, 0)
-        layout.addWidget(hurricane_cocktail_button, 1, 1)
-        layout.addWidget(mojito_button, 2, 0)
+        layout.addWidget(rum_widget, 0, 0)
+        layout.addWidget(mai_widget, 0, 1)
+        layout.addWidget(daiquiri_widget, 1, 0)
+        layout.addWidget(hurricane_widget, 1, 1)
+        layout.addWidget(mojito_widget, 2, 0)
 
         rumTab.setLayout(layout)
         return rumTab
@@ -133,12 +124,13 @@ class MainWindow(QMainWindow):
 
         label = QLabel()
         label.setPixmap(QPixmap("pythonGUI/image/{}_128.png".format(image)))
+        label.setAlignment(Qt.AlignCenter)
         layout.addWidget(label)
 
         button = QPushButton(name)
         button.clicked.connect(function)
         button.setSizePolicy(QSizePolicy.Preferred, QSizePolicy.Expanding)
-        button.setFont(QFont("Sans Serif", 15))
+        button.setFont(QFont("Sans Serif", 10))
         layout.addWidget(button)
 
         widget = QWidget()
