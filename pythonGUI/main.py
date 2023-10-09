@@ -3,13 +3,16 @@ from crono import Crono
 
 from PyQt5.QtCore import QTimer, Qt
 from PyQt5.QtGui import QPixmap, QFont
-from PyQt5.QtWidgets import QApplication, QMainWindow, QWidget, QGridLayout, QTabWidget, QPushButton, QStackedLayout, QProgressBar, QVBoxLayout, QLabel, QSizePolicy  # noqa: E501
+from PyQt5.QtWidgets import QApplication, QMainWindow, QWidget, QGridLayout, QTabWidget, QPushButton, QStackedLayout, \
+    QProgressBar, QVBoxLayout, QLabel, QSizePolicy  # noqa: E501
 
 from drinks import drinks
 from mix_cocktails import pour_drink
 
 
 class MainWindow(QMainWindow):
+    POUR_TIME_STRING = "pour_time"
+    INGREDIENT_STRING = "ingredients"
 
     def __init__(self):
         super(MainWindow, self).__init__()
@@ -62,19 +65,24 @@ class MainWindow(QMainWindow):
         return rumTab
 
     def rum_sour(self):
-        print("sour")
+        drink = drinks["rum_sour"]
+        self.prep_pouring(drink)
 
     def mai_tai(self):
-        print("mai")
+        drink = drinks["mai_tai"]
+        self.prep_pouring(drink)
 
     def daiquiri(self):
-        print("daiquiri")
+        drink = drinks["daiquiri"]
+        self.prep_pouring(drink)
 
     def hurricane(self):
-        print("hurricane")
+        drink = drinks["hurricane"]
+        self.prep_pouring(drink)
 
     def mojito(self):
-        print("mojito")
+        drink = drinks["mojito"]
+        self.prep_pouring(drink)
 
     def vodka_tab(self):
         vodkaTab = QWidget()
@@ -94,28 +102,20 @@ class MainWindow(QMainWindow):
         return vodkaTab
 
     def sex_on_the_beach(self):
-        print("Sex")
+        drink = drinks["sex_on_the_beach"]
+        self.prep_pouring(drink)
 
     def screwdriver(self):
-        self.stackedLayout.setCurrentIndex(1)
-        self.crono.setMaxTime(77)
-        QTimer.singleShot(77000, lambda: self.stackedLayout.setCurrentIndex(0))
-        self.crono.start()
+        drink = drinks["screwdriver"]
+        self.prep_pouring(drink)
 
     def tequila_sunrise(self):
-        self.stackedLayout.setCurrentIndex(1)
-
         drink = drinks["tequila_sunrise"]
-        pour_time = drink["pour_time"]
-
-        self.crono.setMaxTime(pour_time)
-        QTimer.singleShot(pour_time * 1000, lambda: self.stackedLayout.setCurrentIndex(0))  # noqa: E501
-        self.crono.start()
-
-        pour_drink(drink["ingredients"])
+        self.prep_pouring(drink)
 
     def cosmopolitan(self):
-        print("cosmo")
+        drink = drinks["cosmopolitan"]
+        self.prep_pouring(drink)
 
     def define_button(self, name, image, function):
         layout = QVBoxLayout()
@@ -139,6 +139,18 @@ class MainWindow(QMainWindow):
         widget.resize(label.width(), label.height())
 
         return widget
+
+    # Prepares everything and starts pouring the drink
+    def prep_pouring(self, drink):
+        self.stackedLayout.setCurrentIndex(1)
+
+        pour_time = drink[self.POUR_TIME_STRING]
+
+        self.crono.setMaxTime(pour_time)
+        QTimer.singleShot(pour_time * 1000, lambda: self.stackedLayout.setCurrentIndex(0))  # noqa: E501
+        self.crono.start()
+
+        pour_drink(drink[self.INGREDIENT_STRING])
 
 
 if __name__ == "__main__":
