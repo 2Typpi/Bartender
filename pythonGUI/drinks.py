@@ -2,14 +2,14 @@ from enum import IntEnum
 
 
 class Ingredient(IntEnum):
-    VODKA = 0
-    RUM = 1
-    TEQUILA = 17
-    GRENADINE = 3
-    SUGAR_SYRUP = 4
-    CRANBERRY_NECTAR = 5
-    ORANGE_JUICE = 6
-    LIME_JUICE = 7
+    VODKA = 17
+    RUM = 18
+    TEQUILA = 27
+    GRENADINE = 22
+    SUGAR_SYRUP = 23
+    CRANBERRY_NECTAR = 24
+    ORANGE_JUICE = 25
+    LIME_JUICE = 9
 
 
 drinks = {

@@ -76,3 +76,15 @@
 - Sugar syrup
 - Lime juice
 - Mint und water(not in the machine)
+
+
+----
+## GPIO PORTS
+    VODKA = 17
+    RUM = 18
+    TEQUILA = 27
+    GRENADINE = 22
+    SUGAR_SYRUP = 23
+    CRANBERRY_NECTAR = 24
+    ORANGE_JUICE = 25
+    LIME_JUICE = 9
