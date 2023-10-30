@@ -1,4 +1,8 @@
+import os
 import sys
+
+import qdarkstyle
+
 from crono import Crono
 
 from PyQt5.QtCore import QTimer, Qt
@@ -13,13 +17,14 @@ from mix_cocktails import pour_drink
 class MainWindow(QMainWindow):
     POUR_TIME_STRING = "pour_time"
     INGREDIENT_STRING = "ingredients"
+    __location__ = os.path.realpath(os.path.join(os.getcwd(), os.path.dirname(__file__)))
 
     def __init__(self):
         super(MainWindow, self).__init__()
         self.crono = Crono()
 
         self.setWindowTitle("Bartender")
-        self.resize(1024, 600)
+        self.resize(1024, 500)
 
         self.tabs = QTabWidget()
         self.tabs.setTabPosition(QTabWidget.TabPosition.North)
@@ -118,20 +123,20 @@ class MainWindow(QMainWindow):
         self.prep_pouring(drink)
 
     def define_button(self, name, image, function):
-        layout = QVBoxLayout()
-        layout.setAlignment(Qt.AlignCenter)
+        layout = QGridLayout()
         layout.setObjectName("ButtonCard")
 
         label = QLabel()
-        label.setPixmap(QPixmap("pythonGUI/image/{}_128.png".format(image)))
+        label.setPixmap(QPixmap("{0}/image/{1}_128.png".format(self.__location__, image)))
         label.setAlignment(Qt.AlignCenter)
-        layout.addWidget(label)
+        layout.addWidget(label, 0, 0)
 
         button = QPushButton(name)
         button.clicked.connect(function)
-        button.setSizePolicy(QSizePolicy.Preferred, QSizePolicy.Expanding)
+        button.setSizePolicy(QSizePolicy.Preferred, QSizePolicy.Fixed)
+        button.setFixedHeight(100)
         button.setFont(QFont("Sans Serif", 10))
-        layout.addWidget(button)
+        layout.addWidget(button, 0, 1)
 
         widget = QWidget()
         widget.setObjectName("ButtonCard")
@@ -157,11 +162,11 @@ if __name__ == "__main__":
     app = QApplication(sys.argv)
     window = MainWindow()
 
-    File = open("pythonGUI/style/main.qss", 'r')
+    File = open("{}/style/main.qss".format(os.path.realpath(os.path.join(os.getcwd(), os.path.dirname(__file__)))), 'r')
 
     with File:
         qss = File.read()
-        app.setStyleSheet(qss)
+        app.setStyleSheet(qss + qdarkstyle.load_stylesheet_pyqt5())
 
     window.show()
     sys.exit(app.exec())

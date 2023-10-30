@@ -2,7 +2,6 @@ QPushButton {
   color: #fff;
   font-weight: 600;
   border-radius: 8px;
-  border: 1px solid #0d6efd;
   padding: 5px 15px;
   margin-top: 10px;
   outline: 0px;
@@ -10,7 +9,6 @@ QPushButton {
 
 QWidget#ButtonCard {
   border: 1px solid black;
-  background-color: #33373B;
 }
 
 QTabWidget::pane {
