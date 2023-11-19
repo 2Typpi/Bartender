@@ -31,6 +31,7 @@ class MainWindow(QMainWindow):
 
         self.tabs.addTab(self.vodka_tab(), "Vodka")
         self.tabs.addTab(self.rum_tab(), "Rum")
+        self.tabs.addTab(self.maintenance_tab(), "Wartung")
 
         self.stackedLayout = QStackedLayout()
 
@@ -120,6 +121,27 @@ class MainWindow(QMainWindow):
 
     def cosmopolitan(self):
         drink = drinks["cosmopolitan"]
+        self.prep_pouring(drink)
+
+    def maintenance_tab(self):
+        maintenanceTab = QWidget()
+        layout = QGridLayout()
+
+        refuel_widget = self.define_button("Ansaugen", "refuel", self.refuel)  # noqa: E501
+        clean_widget = self.define_button("Säubern", "mop", self.clean)  # noqa: E501
+
+        layout.addWidget(refuel_widget, 0, 0)
+        layout.addWidget(clean_widget, 0, 1)
+
+        maintenanceTab.setLayout(layout)
+        return maintenanceTab
+
+    def clean(self):
+        drink = drinks["clean"]
+        self.prep_pouring(drink)
+
+    def refuel(self):
+        drink = drinks["fill_up"]
         self.prep_pouring(drink)
 
     def define_button(self, name, image, function):
