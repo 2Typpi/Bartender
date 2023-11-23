@@ -32,6 +32,7 @@ class MainWindow(QMainWindow):
         self.tabs.addTab(self.vodka_tab(), "Vodka")
         self.tabs.addTab(self.rum_tab(), "Rum")
         self.tabs.addTab(self.maintenance_tab(), "Wartung")
+        self.tabs.addTab(self.single_tab(), "Single")
 
         self.stackedLayout = QStackedLayout()
 
@@ -142,6 +143,63 @@ class MainWindow(QMainWindow):
 
     def refuel(self):
         drink = drinks["fill_up"]
+        self.prep_pouring(drink)
+
+    def single_tab(self):
+        singleTab = QWidget()
+        layout = QGridLayout()
+
+        vodka_widget = self.define_button("Vodka", None, self.vodka)  # noqa: E501
+        rum_widget = self.define_button("Rum", None, self.rum)  # noqa: E501
+        tequila_widget = self.define_button("Tequila", None, self.tequila)  # noqa: E501
+        cranberry_widget = self.define_button("Cranberry", None, self.cranberry)  # noqa: E501
+        grenadine_widget = self.define_button("Grenadine", None, self.grenadine)  # noqa: E501
+        lime_widget = self.define_button("Limette", None, self.lime)  # noqa: E501
+        orange_widget = self.define_button("Orange", None, self.orange)  # noqa: E501
+        sugar_widget = self.define_button("Zucker", None, self.sugar)  # noqa: E501
+
+        layout.addWidget(vodka_widget, 0, 0)
+        layout.addWidget(rum_widget, 0, 1)
+        layout.addWidget(tequila_widget, 1, 0)
+        layout.addWidget(cranberry_widget, 1, 1)
+        layout.addWidget(grenadine_widget, 2, 0)
+        layout.addWidget(lime_widget, 2, 1)
+        layout.addWidget(orange_widget, 3, 0)
+        layout.addWidget(sugar_widget, 3, 1)
+
+        singleTab.setLayout(layout)
+        return singleTab
+
+    def vodka(self):
+        drink = drinks["vodka"]
+        self.prep_pouring(drink)
+
+    def rum(self):
+        drink = drinks["rum"]
+        self.prep_pouring(drink)
+
+    def tequila(self):
+        drink = drinks["tequila"]
+        self.prep_pouring(drink)
+
+    def cranberry(self):
+        drink = drinks["cranberry"]
+        self.prep_pouring(drink)
+
+    def grenadine(self):
+        drink = drinks["grenadine"]
+        self.prep_pouring(drink)
+
+    def lime(self):
+        drink = drinks["lime"]
+        self.prep_pouring(drink)
+
+    def orange(self):
+        drink = drinks["orange"]
+        self.prep_pouring(drink)
+
+    def sugar(self):
+        drink = drinks["sugar"]
         self.prep_pouring(drink)
 
     def define_button(self, name, image, function):

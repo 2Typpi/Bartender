@@ -252,4 +252,76 @@ drinks = {
         }
         ]
     },
+    "vodka": {
+        "pour_time": 15,
+        "ingredients": [{
+            "wait_before_pour": 0,
+            "name": Ingredient.VODKA,
+            "pour_time": 15
+        }
+        ]
+    },
+    "rum": {
+        "pour_time": 15,
+        "ingredients": [{
+            "wait_before_pour": 0,
+            "name": Ingredient.RUM,
+            "pour_time": 15
+        }
+        ]
+    },
+    "tequila": {
+        "pour_time": 15,
+        "ingredients": [{
+            "wait_before_pour": 0,
+            "name": Ingredient.TEQUILA,
+            "pour_time": 15
+        }
+        ]
+    },
+    "cranberry": {
+        "pour_time": 15,
+        "ingredients": [{
+            "wait_before_pour": 0,
+            "name": Ingredient.CRANBERRY_NECTAR,
+            "pour_time": 15
+        }
+        ]
+    },
+    "grenadine": {
+        "pour_time": 15,
+        "ingredients": [{
+            "wait_before_pour": 0,
+            "name": Ingredient.GRENADINE,
+            "pour_time": 15
+        }
+        ]
+    },
+    "lime": {
+        "pour_time": 15,
+        "ingredients": [{
+            "wait_before_pour": 0,
+            "name": Ingredient.LIME_JUICE,
+            "pour_time": 15
+        }
+        ]
+    },
+    "orange": {
+        "pour_time": 15,
+        "ingredients": [{
+            "wait_before_pour": 0,
+            "name": Ingredient.ORANGE_JUICE,
+            "pour_time": 15
+        }
+        ]
+    },
+    "sugar": {
+        "pour_time": 15,
+        "ingredients": [{
+            "wait_before_pour": 0,
+            "name": Ingredient.SUGAR_SYRUP,
+            "pour_time": 15
+        }
+        ]
+    },
 }
