@@ -178,7 +178,7 @@ drinks = {
         }
         ]
     },
-    "fill_up": {
+    "refuel": {
         "pour_time": 40,
         "ingredients": [{
             "wait_before_pour": 0,
@@ -215,7 +215,7 @@ drinks = {
         }
         ]
     },
-    "clean": {
+    "mop": {
         "pour_time": 120,
         "ingredients": [{
             "wait_before_pour": 0,
